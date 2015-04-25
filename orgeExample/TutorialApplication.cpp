@@ -29,8 +29,10 @@ TutorialApplication::~TutorialApplication(void)
 void TutorialApplication::createScene(void)
 {
     // create your scene here :)
-	mCamera->setPosition(0, 47, 222);
+	mCamera->setPosition(0, 47, 400);
 
+
+	fighter.init(mSceneMgr);
 
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.5,0.5,0.5));
 	Ogre::Entity* ogreEntity = mSceneMgr->createEntity("ogrehead.mesh");
@@ -43,7 +45,7 @@ void TutorialApplication::createScene(void)
 	
 	Ogre::SceneNode* ogreNode2 = ogreNode->createChildSceneNode(Ogre::Vector3(84, 48, 0));
 	Ogre::SceneNode* ogreNode3 = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-	Ogre::SceneNode* ogreNode4 = mSceneMgr->getRootSceneNode()->createChildSceneNode("player");
+	//Ogre::SceneNode* ogreNode4 = mSceneMgr->getRootSceneNode()->createChildSceneNode("player");
 
 
 	ogreNode->attachObject(ogreEntity);
@@ -58,11 +60,12 @@ void TutorialApplication::createScene(void)
 
 	Ogre::Entity* ogreEntity4 = mSceneMgr->createEntity("RZR-002.mesh");
  
+	/*
 	ogreNode4->setPosition(-84, 48, 0);
 	ogreNode4->yaw(Ogre::Degree(-180));
 	ogreNode4->setScale(3,3,3);
 	ogreNode4->pitch(Ogre::Degree(-90));
-	ogreNode4->attachObject(ogreEntity4);
+	ogreNode4->attachObject(ogreEntity4);*/
 
 	
 	Ogre::Light* light = mSceneMgr->createLight("MainLight");

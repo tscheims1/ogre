@@ -40,7 +40,8 @@ BaseApplication::BaseApplication(void)
     mInputManager(0),
     mMouse(0),
     mKeyboard(0),
-	mOverlaySystem(0)
+	mOverlaySystem(0),
+	fighter()
 {
 }
 
@@ -301,7 +302,7 @@ bool BaseApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
             mDetailsPanel->setParamValue(7, Ogre::StringConverter::toString(mCamera->getDerivedOrientation().z));
         }
     }
-	Ogre::Node* player = mSceneMgr->getRootSceneNode()->getChild("player");
+	/*Ogre::Node* player = mSceneMgr->getRootSceneNode()->getChild("fighter");*/
 	Ogre::Vector3 pos =  Ogre::Vector3(0,0,0);
 	if(input[UP])
 		pos.z = 50;
@@ -313,7 +314,8 @@ bool BaseApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
 		pos.x = -50;
 	
 	//pos*=evt.timeSinceLastFrame;
-	(*player).translate(pos*evt.timeSinceLastFrame,Ogre::Node::TS_LOCAL);
+	//(*player).translate(pos*evt.timeSinceLastFrame,Ogre::Node::TS_LOCAL);
+	fighter.move(pos*evt.timeSinceLastFrame);
 	
 	
     return true;

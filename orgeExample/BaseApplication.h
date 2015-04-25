@@ -17,6 +17,8 @@ This source file is part of the
 #ifndef __BaseApplication_h_
 #define __BaseApplication_h_
 
+#include "Sprite.h"
+#include "Fighter.h"
 
 
 
@@ -57,6 +59,8 @@ protected:
     virtual void windowResized(Ogre::RenderWindow* rw);
     //Unattach OIS before window shutdown (very important under Linux)
     virtual void windowClosed(Ogre::RenderWindow* rw);
+
+	Fighter fighter;
 
     Ogre::Root *mRoot;
     Ogre::Camera* mCamera;
