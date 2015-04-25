@@ -16,6 +16,14 @@ This source file is part of the
 */
 #include "BaseApplication.h"
 
+#define UP			0
+#define DOWN		1
+#define LEFT		2
+#define RIGHT		3
+#define FIRE		4
+
+bool input[5] = {0,0,0,0,0};
+
 //-------------------------------------------------------------------------------------
 BaseApplication::BaseApplication(void)
     : mRoot(0),
@@ -264,6 +272,7 @@ bool BaseApplication::setup(void)
 //-------------------------------------------------------------------------------------
 bool BaseApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
+	
     if(mWindow->isClosed())
         return false;
 
@@ -292,7 +301,21 @@ bool BaseApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
             mDetailsPanel->setParamValue(7, Ogre::StringConverter::toString(mCamera->getDerivedOrientation().z));
         }
     }
-
+	Ogre::Node* player = mSceneMgr->getRootSceneNode()->getChild("player");
+	Ogre::Vector3 pos =  Ogre::Vector3(0,0,0);
+	if(input[UP])
+		pos.z = 50;
+	if(input[DOWN])
+		pos.z = -50;
+	if(input[LEFT])
+		pos.x = 50;
+	if(input[RIGHT])
+		pos.x = -50;
+	
+	//pos*=evt.timeSinceLastFrame;
+	(*player).translate(pos*evt.timeSinceLastFrame,Ogre::Node::TS_LOCAL);
+	
+	
     return true;
 }
 //-------------------------------------------------------------------------------------
@@ -386,17 +409,27 @@ bool BaseApplication::keyPressed( const OIS::KeyEvent &arg )
         mShutDown = true;
     }
 
-	Ogre::Node* player = mSceneMgr->getRootSceneNode()->getChild("player");
-	Ogre::Vector3 pos = player->getPosition();
 	switch(arg.key)
 	{
 	
 		
+		case OIS::KC_UP:
+			input[UP] = true;
+		break;
+
+		case OIS::KC_RIGHT:
+			input[RIGHT] = true;
+			break;
+
+		case OIS::KC_DOWN:
+			input[DOWN] = true;
+			break;
 
 		case OIS::KC_LEFT:
-		player->setPosition(pos.x-10,pos.y,pos.z);
-		break;
+			input[LEFT] = true;
+			break;
 	}
+	//player->setPosition(player->getPosition()+pos);
 
 
 
@@ -406,6 +439,26 @@ bool BaseApplication::keyPressed( const OIS::KeyEvent &arg )
 
 bool BaseApplication::keyReleased( const OIS::KeyEvent &arg )
 {
+	switch(arg.key)
+	{
+		case OIS::KC_UP:
+			input[UP] = false;
+		break;
+
+		case OIS::KC_RIGHT:
+			input[RIGHT] = false;
+			break;
+
+		case OIS::KC_DOWN:
+			input[DOWN] = false;
+			break;
+
+		case OIS::KC_LEFT:
+			input[LEFT] = false;
+			break;
+	}
+
+
     mCameraMan->injectKeyUp(arg);
     return true;
 }
