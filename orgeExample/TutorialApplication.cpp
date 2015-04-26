@@ -32,7 +32,14 @@ void TutorialApplication::createScene(void)
 	mCamera->setPosition(0, 47, 400);
 
 
-	fighter.init(mSceneMgr);
+	Ogre::Vector3 position = Ogre::Vector3(-84, 48,0);
+	fighter = new Fighter(mSceneMgr,position);
+	
+
+	position = Ogre::Vector3(84, 48, 0);
+	enemyList.push_back(new Enemy(mSceneMgr,position));
+
+
 
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.5,0.5,0.5));
 	Ogre::Entity* ogreEntity = mSceneMgr->createEntity("ogrehead.mesh");
@@ -43,19 +50,18 @@ void TutorialApplication::createScene(void)
 	Ogre::SceneNode* ogreNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
 
 	
-	Ogre::SceneNode* ogreNode2 = ogreNode->createChildSceneNode(Ogre::Vector3(84, 48, 0));
+	//Ogre::SceneNode* ogreNode2 = ogreNode->createChildSceneNode(Ogre::Vector3(84, 48, 0));
 	Ogre::SceneNode* ogreNode3 = mSceneMgr->getRootSceneNode()->createChildSceneNode();
 	//Ogre::SceneNode* ogreNode4 = mSceneMgr->getRootSceneNode()->createChildSceneNode("player");
 
 
 	ogreNode->attachObject(ogreEntity);
-	ogreNode2->attachObject(ogreEntity2);
+	///ogreNode2->attachObject(ogreEntity2);
 	
 	
 	Ogre::Entity* ogreEntity3 = mSceneMgr->createEntity("ogrehead.mesh");
  
 	ogreNode3->setPosition(0, 104, 0);
-	ogreNode3->setScale(2, 1.2, 1); 
 	ogreNode3->attachObject(ogreEntity3);
 
 	Ogre::Entity* ogreEntity4 = mSceneMgr->createEntity("RZR-002.mesh");

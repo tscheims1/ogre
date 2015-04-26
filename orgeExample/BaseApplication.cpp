@@ -315,8 +315,27 @@ bool BaseApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	
 	//pos*=evt.timeSinceLastFrame;
 	//(*player).translate(pos*evt.timeSinceLastFrame,Ogre::Node::TS_LOCAL);
-	fighter.move(pos*evt.timeSinceLastFrame);
+	fighter->move(pos*evt.timeSinceLastFrame);
 	
+	for(Enemy* e:enemyList)
+	{
+		if(e->checkCollsion(fighter))
+		{	
+			//Game Over
+			/*
+			Ogre::AxisAlignedBox boxA = e->getBoundingBox();
+			Ogre::AxisAlignedBox boxB = fighter->getBoundingBox();
+			
+			Ogre::Vector3 vectorA = boxA.getCenter();
+			Ogre::Vector3 vectorB = boxB.getCenter();
+			
+			std::string text = "vA"+std::to_string(vectorA.x) + " "+std::to_string(vectorA.y) +" "+std::to_string(vectorA.z) + " <--->"+
+				"vB"+std::to_string(vectorB.x) +" " + std::to_string(vectorB.y) + " "+std::to_string(vectorB.z);
+			MessageBox(NULL,"title",text.c_str()
+				,MB_OK);*/
+		}
+	}
+
 	
     return true;
 }

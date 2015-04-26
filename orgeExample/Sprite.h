@@ -7,5 +7,8 @@ protected:
 	Ogre::SceneNode* node;
 public:
 	Sprite();
+	virtual void move(Ogre::Vector3 moveVector);
+	virtual bool checkCollsion(Sprite* other);
+	virtual Ogre::AxisAlignedBox getBoundingBox();
 };
 #endif

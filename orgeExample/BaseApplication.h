@@ -19,6 +19,7 @@ This source file is part of the
 
 #include "Sprite.h"
 #include "Fighter.h"
+#include "Enemy.h"
 
 
 
@@ -60,7 +61,12 @@ protected:
     //Unattach OIS before window shutdown (very important under Linux)
     virtual void windowClosed(Ogre::RenderWindow* rw);
 
-	Fighter fighter;
+
+	//----------------------------
+	Fighter* fighter;
+	std::vector<Enemy*> enemyList; 
+
+	//-----------------------
 
     Ogre::Root *mRoot;
     Ogre::Camera* mCamera;

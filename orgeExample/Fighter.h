@@ -2,16 +2,11 @@
 #define __FIGHTER_H__
 #include "Sprite.h"
 
-class Fighter : Sprite
+class Fighter : public Sprite
 {
 
 public:
-	Fighter();
-	void move(Ogre::Vector3 moveVector);
-	void init(Ogre::SceneManager* sceneManager);
-
-
-
+	Fighter(Ogre::SceneManager* sceneManager,Ogre::Vector3 position);
 
 };
 #endif
