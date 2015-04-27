@@ -312,6 +312,8 @@ bool BaseApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
 		pos.x = 50;
 	if(input[RIGHT])
 		pos.x = -50;
+	if(input[FIRE])
+		fighter->fire();
 	
 	//pos*=evt.timeSinceLastFrame;
 	//(*player).translate(pos*evt.timeSinceLastFrame,Ogre::Node::TS_LOCAL);
@@ -449,6 +451,9 @@ bool BaseApplication::keyPressed( const OIS::KeyEvent &arg )
 		case OIS::KC_LEFT:
 			input[LEFT] = true;
 			break;
+			
+		case OIS::KC_SPACE:
+			input[FIRE] = true;
 	}
 	//player->setPosition(player->getPosition()+pos);
 
@@ -477,6 +482,8 @@ bool BaseApplication::keyReleased( const OIS::KeyEvent &arg )
 		case OIS::KC_LEFT:
 			input[LEFT] = false;
 			break;
+		case OIS::KC_SPACE:
+			input[FIRE] = false;
 	}
 
 

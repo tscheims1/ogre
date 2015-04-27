@@ -12,4 +12,13 @@ Enemy::Enemy(Ogre::SceneManager* sceneManager,Ogre::Vector3 position)
 	node->pitch(Ogre::Degree(90));
 	node->attachObject(entity);
 	node->showBoundingBox(true);
+
+}
+void Enemy::die()
+{
+
+}
+void Enemy::update(Ogre::Real deltaTime)
+{
+
 }
