@@ -305,13 +305,13 @@ bool BaseApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	/*Ogre::Node* player = mSceneMgr->getRootSceneNode()->getChild("fighter");*/
 	Ogre::Vector3 pos =  Ogre::Vector3(0,0,0);
 	if(input[UP])
-		pos.z = 50;
+		pos.z = 2*GAME_UNIT;
 	if(input[DOWN])
-		pos.z = -50;
+		pos.z = -2*GAME_UNIT;
 	if(input[LEFT])
-		pos.x = 50;
+		pos.x = 2*GAME_UNIT;
 	if(input[RIGHT])
-		pos.x = -50;
+		pos.x = -2*GAME_UNIT;
 	if(input[FIRE])
 		fighter->fire();
 	
@@ -337,6 +337,7 @@ bool BaseApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
 				,MB_OK);*/
 		}
 	}
+	fighter->update(evt.timeSinceLastFrame);
 
 	
     return true;

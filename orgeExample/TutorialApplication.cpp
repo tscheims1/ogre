@@ -33,7 +33,7 @@ void TutorialApplication::createScene(void)
 
 
 	Ogre::Vector3 position = Ogre::Vector3(-84, 48,0);
-	fighter = new Fighter(mSceneMgr,position);
+	fighter = new Fighter(&mSceneMgr,&mCamera,position);
 	
 
 	position = Ogre::Vector3(84, 48, 0);

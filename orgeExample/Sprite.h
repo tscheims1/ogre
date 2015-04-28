@@ -5,6 +5,7 @@ class Sprite
 protected:
 	Ogre::Entity* entity;
 	Ogre::SceneManager* sceneManager;
+	Ogre::SceneManager** sceneManagerPtr;
 	Ogre::SceneNode* node;
 	Ogre::SceneNode* root;
 public:

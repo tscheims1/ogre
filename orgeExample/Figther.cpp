@@ -1,11 +1,11 @@
 #include "Fighter.h"
-Fighter::Fighter(Ogre::SceneManager* sceneManager,Ogre::Vector3 position)
+Fighter::Fighter(Ogre::SceneManager** sceneManagerPtr,Ogre::Camera** camera,Ogre::Vector3 position)
 {
 
-	shotCount = 0;
-	this->sceneManager = sceneManager;
-	entity = sceneManager->createEntity("RZR-002.mesh");
-	root = sceneManager->getRootSceneNode();
+	this->cameraPtr = camera;
+	this->sceneManagerPtr = sceneManagerPtr;
+	entity = (*this->sceneManagerPtr)->createEntity("RZR-002.mesh");
+	root =	 (*this->sceneManagerPtr)->getRootSceneNode();
 	node = root->createChildSceneNode("fighter");
 
 	
@@ -23,21 +23,36 @@ void Fighter::die()
 }
 void Fighter::fire()
 {
-	Ogre::Entity* shot = sceneManager->createEntity("shot"+std::to_string(shots.size()),"RZR-002.mesh");
-
 	Ogre::Vector3 shotPos = node->getPosition();
-	shotPos.z += 2;
-	Ogre::SceneNode* shotNode = root->createChildSceneNode(shotPos);
-	shotNode->scale(0.2,0.2,0.2);
-	shotNode->yaw(Ogre::Degree(-180));
-	shotNode->pitch(Ogre::Degree(-90));
-	shotNode->attachObject(shot);
-
-	
-	shots.push_back(shotNode);
+	Shot* shotPtr = new Shot(sceneManagerPtr,shotPos);	
+	shots.push_back(shotPtr);
 
 }
 void Fighter::update(Ogre::Real deltaTime)
 {
+	for(std::vector<Shot*>::iterator it = shots.begin(); it != shots.end();)
+	{
+		(*it)->update(deltaTime);
+		/**
+		@see	http://www.ogre3d.org/forums/viewtopic.php?t=2519
+				http://de.wikipedia.org/wiki/Projektionsmatrix
+		 */
+		Ogre::Vector3 hcpPos = (*cameraPtr)->getProjectionMatrix()*(*cameraPtr)->getViewMatrix()*node->getPosition();
 
+		if ((hcpPos.x < -1.0f) || 
+		  (hcpPos.x > 1.0f) ||
+		  (hcpPos.y < -1.0f) || 
+		  (hcpPos.y > 1.0f))
+		{
+			(*it)->die();
+			delete (*it);
+			it = shots.erase(it);
+		}
+		else
+		{
+			++it;
+		}
+
+		
+	}
 }
