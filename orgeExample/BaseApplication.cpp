@@ -273,7 +273,7 @@ bool BaseApplication::setup(void)
 //-------------------------------------------------------------------------------------
 bool BaseApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
-	
+
     if(mWindow->isClosed())
         return false;
 

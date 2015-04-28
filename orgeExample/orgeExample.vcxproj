@@ -94,6 +94,7 @@
     <ClCompile Include="BaseApplication.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Figther.cpp" />
+    <ClCompile Include="GameContainer.cpp" />
     <ClCompile Include="Shot.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -106,6 +107,7 @@
     <ClInclude Include="BaseApplication.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Fighter.h" />
+    <ClInclude Include="GameContainer.h" />
     <ClInclude Include="Shot.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="stdafx.h" />

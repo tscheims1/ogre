@@ -52,7 +52,9 @@ void Fighter::update(Ogre::Real deltaTime)
 		{
 			++it;
 		}
-
-		
 	}
+}
+void Fighter::checkEnemyShot(Sprite* enemy)
+{
+
 }

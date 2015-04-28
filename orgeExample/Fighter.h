@@ -15,6 +15,7 @@ public:
 	void die();
 	void fire();
 	void update(Ogre::Real deltaTime);
+	void checkEnemyShot(Sprite* enemy);
 
 };
 #endif
