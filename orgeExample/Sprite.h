@@ -3,10 +3,10 @@
 class Sprite
 {
 protected:
-	Ogre::Entity* entity;
-	Ogre::SceneManager** sceneManagerPtr;
-	Ogre::SceneNode* node;
-	Ogre::SceneNode* root;
+	Ogre::Entity* mEntity;
+	Ogre::SceneManager** mSceneManagerPtr;
+	Ogre::SceneNode* mNode;
+	Ogre::SceneNode* mRoot;
 public:
 	Sprite();
 	virtual void move(Ogre::Vector3 moveVector);

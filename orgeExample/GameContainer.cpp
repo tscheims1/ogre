@@ -19,7 +19,13 @@ void GameContainer::manageCollision()
 
 	for(std::vector<Sprite*>::iterator it = mElements.begin();it != mElements.end();)
 	{
-		mFighter->checkCollsion((*it));
+		if(mFighter->checkCollsion((*it)))
+		{
+			mFighter->die();
+			delete (mFighter);
+
+			break;
+		}
 		if(mFighter->checkEnemyShot((*it)))
 		{
 			delete (*it);

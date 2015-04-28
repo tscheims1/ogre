@@ -1,43 +1,44 @@
 #include "Fighter.h"
-Fighter::Fighter(Ogre::SceneManager** sceneManagerPtr,Ogre::Camera** camera,Ogre::Vector3 position)
+Fighter::Fighter(Ogre::SceneManager** sceneManagerPtr,Ogre::Camera** cameraPtr,Ogre::Vector3 position)
 {
 
-	this->cameraPtr = camera;
-	this->sceneManagerPtr = sceneManagerPtr;
-	entity = (*this->sceneManagerPtr)->createEntity("RZR-002.mesh");
-	root =	 (*this->sceneManagerPtr)->getRootSceneNode();
-	node = root->createChildSceneNode("fighter");
+	mCameraPtr = cameraPtr;
+	mSceneManagerPtr = sceneManagerPtr;
+	mEntity = (*mSceneManagerPtr)->createEntity("RZR-002.mesh");
+	mRoot =	 (*mSceneManagerPtr)->getRootSceneNode();
+	mNode = mRoot->createChildSceneNode("fighter");
 
 	
-	node->setPosition(position);
-	node->yaw(Ogre::Degree(-180));
+	mNode->setPosition(position);
+	mNode->yaw(Ogre::Degree(-180));
 
-	node->pitch(Ogre::Degree(-90));
-	node->attachObject(entity);
-	node->showBoundingBox(true);
+	mNode->pitch(Ogre::Degree(-90));
+	mNode->attachObject(mEntity);
+	mNode->showBoundingBox(true);
 }
 void Fighter::die()
 {
-	
+	mNode->detachAllObjects();
+	(*mSceneManagerPtr)->destroySceneNode(mNode);
 
 }
 void Fighter::fire()
 {
-	Ogre::Vector3 shotPos = node->getPosition();
-	Shot* shotPtr = new Shot(sceneManagerPtr,shotPos);	
-	shots.push_back(shotPtr);
+	Ogre::Vector3 shotPos = mNode->getPosition();
+	Shot* shotPtr = new Shot(mSceneManagerPtr,shotPos);	
+	mShots.push_back(shotPtr);
 
 }
 void Fighter::update(Ogre::Real deltaTime)
 {
-	for(std::vector<Shot*>::iterator it = shots.begin(); it != shots.end();)
+	for(std::vector<Shot*>::iterator it = mShots.begin(); it != mShots.end();)
 	{
 		(*it)->update(deltaTime);
 		/**
 		@see	http://www.ogre3d.org/forums/viewtopic.php?t=2519
 				http://de.wikipedia.org/wiki/Projektionsmatrix
 		 */
-		Ogre::Vector3 hcpPos = (*cameraPtr)->getProjectionMatrix()*(*cameraPtr)->getViewMatrix()*node->getPosition();
+		Ogre::Vector3 hcpPos = (*mCameraPtr)->getProjectionMatrix()*(*mCameraPtr)->getViewMatrix()*mNode->getPosition();
 
 		if ((hcpPos.x < -1.0f) || 
 		  (hcpPos.x > 1.0f) ||
@@ -46,7 +47,7 @@ void Fighter::update(Ogre::Real deltaTime)
 		{
 			(*it)->die();
 			delete (*it);
-			it = shots.erase(it);
+			it = mShots.erase(it);
 		}
 		else
 		{
@@ -56,7 +57,7 @@ void Fighter::update(Ogre::Real deltaTime)
 }
 bool Fighter::checkEnemyShot(Sprite* enemy)
 {
-	for(std::vector<Shot*>::iterator it = shots.begin(); it != shots.end(); ++it)
+	for(std::vector<Shot*>::iterator it = mShots.begin(); it != mShots.end(); ++it)
 	{
 		if((*it)->checkCollsion(enemy))
 		{

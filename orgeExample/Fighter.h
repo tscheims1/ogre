@@ -6,12 +6,11 @@
 class Fighter : public Sprite
 {
 protected:
-	Ogre::Entity* shot;
-	std::vector<Shot*>shots;
-	Ogre::Camera** cameraPtr;
+	std::vector<Shot*>mShots;
+	Ogre::Camera** mCameraPtr;
 	int shotCount;
 public:
-	Fighter::Fighter(Ogre::SceneManager** sceneManagerPtr,Ogre::Camera** camera,Ogre::Vector3 position);
+	Fighter::Fighter(Ogre::SceneManager** sceneManagerPtr,Ogre::Camera** cameraPtr,Ogre::Vector3 position);
 	void die();
 	void fire();
 	void update(Ogre::Real deltaTime);

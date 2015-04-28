@@ -4,14 +4,14 @@ Sprite::Sprite(){}
 
 bool Sprite::checkCollsion(Sprite* other)
 {
-	Ogre::AxisAlignedBox box = node->_getWorldAABB();
+	Ogre::AxisAlignedBox box = mNode->_getWorldAABB();
 	return box.intersects(other->getBoundingBox());
 }
 Ogre::AxisAlignedBox Sprite::getBoundingBox()
 {
-	return node->_getWorldAABB();
+	return mNode->_getWorldAABB();
 }
 void Sprite::move(Ogre::Vector3 moveVector)
 {
-	node->translate(moveVector,Ogre::Node::TS_LOCAL);
+	mNode->translate(moveVector,Ogre::Node::TS_LOCAL);
 }

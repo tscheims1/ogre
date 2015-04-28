@@ -2,21 +2,21 @@
 
 Enemy::Enemy(Ogre::SceneManager** sceneManager,Ogre::Vector3 position)
 {
-	entity = (*sceneManager)->createEntity("RZR-002.mesh");
-	node = (*sceneManager)->getRootSceneNode()->createChildSceneNode();
-	sceneManagerPtr = sceneManager;
+	mEntity = (*sceneManager)->createEntity("RZR-002.mesh");
+	mNode = (*sceneManager)->getRootSceneNode()->createChildSceneNode();
+	mSceneManagerPtr = sceneManager;
 
-	node->setPosition(position);
-	node->yaw(Ogre::Degree(-180));
+	mNode->setPosition(position);
+	mNode->yaw(Ogre::Degree(-180));
 
-	node->pitch(Ogre::Degree(90));
-	node->attachObject(entity);
-	node->showBoundingBox(true);
+	mNode->pitch(Ogre::Degree(90));
+	mNode->attachObject(mEntity);
+	mNode->showBoundingBox(true);
 }
 void Enemy::die()
 {
-	node->detachAllObjects();
-	(*sceneManagerPtr)->destroySceneNode(node);
+	mNode->detachAllObjects();
+	(*mSceneManagerPtr)->destroySceneNode(mNode);
 }
 void Enemy::update(Ogre::Real deltaTime)
 {

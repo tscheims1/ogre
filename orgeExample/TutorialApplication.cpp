@@ -37,8 +37,8 @@ void TutorialApplication::createScene(void)
 	mGameContainer = new GameContainer(fighter);
 	
 	position = Ogre::Vector3(84, 48, 0);
+	mGameContainer = new GameContainer(fighter);
 	mGameContainer->add(new Enemy(&mSceneMgr,position));
-	//enemyList.push_back(new Enemy(&mSceneMgr,position));
 
 
 
