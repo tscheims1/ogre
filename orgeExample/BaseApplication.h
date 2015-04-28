@@ -20,6 +20,7 @@ This source file is part of the
 #include "Sprite.h"
 #include "Fighter.h"
 #include "Enemy.h"
+#include "GameContainer.h"
 
 
 
@@ -44,6 +45,7 @@ protected:
     virtual void createResourceListener(void);
     virtual void loadResources(void);
 
+
     // Ogre::FrameListener
     virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
 
@@ -64,7 +66,8 @@ protected:
 
 	//----------------------------
 	Fighter* fighter;
-	std::vector<Enemy*> enemyList; 
+	//std::vector<Enemy*> enemyList; 
+	GameContainer* mGameContainer;
 
 	//-----------------------
 

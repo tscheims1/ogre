@@ -1,10 +1,10 @@
 #include "Enemy.h"
 
-Enemy::Enemy(Ogre::SceneManager* sceneManager,Ogre::Vector3 position)
+Enemy::Enemy(Ogre::SceneManager** sceneManager,Ogre::Vector3 position)
 {
-	entity = sceneManager->createEntity("RZR-002.mesh");
-	node = sceneManager->getRootSceneNode()->createChildSceneNode();
-	
+	entity = (*sceneManager)->createEntity("RZR-002.mesh");
+	node = (*sceneManager)->getRootSceneNode()->createChildSceneNode();
+	sceneManagerPtr = sceneManager;
 
 	node->setPosition(position);
 	node->yaw(Ogre::Degree(-180));
@@ -12,11 +12,11 @@ Enemy::Enemy(Ogre::SceneManager* sceneManager,Ogre::Vector3 position)
 	node->pitch(Ogre::Degree(90));
 	node->attachObject(entity);
 	node->showBoundingBox(true);
-
 }
 void Enemy::die()
 {
-
+	node->detachAllObjects();
+	(*sceneManagerPtr)->destroySceneNode(node);
 }
 void Enemy::update(Ogre::Real deltaTime)
 {

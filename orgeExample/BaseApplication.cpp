@@ -40,8 +40,7 @@ BaseApplication::BaseApplication(void)
     mInputManager(0),
     mMouse(0),
     mKeyboard(0),
-	mOverlaySystem(0),
-	fighter()
+	mOverlaySystem(0)
 {
 }
 
@@ -319,7 +318,7 @@ bool BaseApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	//(*player).translate(pos*evt.timeSinceLastFrame,Ogre::Node::TS_LOCAL);
 	fighter->move(pos*evt.timeSinceLastFrame);
 	
-	for(Enemy* e:enemyList)
+	/*for(Enemy* e:enemyList)
 	{
 		if(e->checkCollsion(fighter))
 		{	
@@ -334,11 +333,11 @@ bool BaseApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
 			std::string text = "vA"+std::to_string(vectorA.x) + " "+std::to_string(vectorA.y) +" "+std::to_string(vectorA.z) + " <--->"+
 				"vB"+std::to_string(vectorB.x) +" " + std::to_string(vectorB.y) + " "+std::to_string(vectorB.z);
 			MessageBox(NULL,"title",text.c_str()
-				,MB_OK);*/
+				,MB_OK);
 		}
-	}
-	fighter->update(evt.timeSinceLastFrame);
-
+	}*/
+	mGameContainer->update(evt.timeSinceLastFrame);
+	mGameContainer->manageCollision();
 	
     return true;
 }

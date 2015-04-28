@@ -34,10 +34,11 @@ void TutorialApplication::createScene(void)
 
 	Ogre::Vector3 position = Ogre::Vector3(-84, 48,0);
 	fighter = new Fighter(&mSceneMgr,&mCamera,position);
+	mGameContainer = new GameContainer(fighter);
 	
-
 	position = Ogre::Vector3(84, 48, 0);
-	enemyList.push_back(new Enemy(mSceneMgr,position));
+	mGameContainer->add(new Enemy(&mSceneMgr,position));
+	//enemyList.push_back(new Enemy(&mSceneMgr,position));
 
 
 
