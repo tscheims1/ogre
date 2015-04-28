@@ -17,9 +17,15 @@ void GameContainer::update(Ogre::Real deltaTime)
 void GameContainer::manageCollision()
 {
 
-	for(std::vector<Sprite*>::iterator it = mElements.begin();it != mElements.end(); ++it)
+	for(std::vector<Sprite*>::iterator it = mElements.begin();it != mElements.end();)
 	{
 		mFighter->checkCollsion((*it));
-		mFighter->checkEnemyShot((*it));
+		if(mFighter->checkEnemyShot((*it)))
+		{
+			delete (*it);
+			it = mElements.erase(it);
+		}
+		else
+			++it;
 	}
 }

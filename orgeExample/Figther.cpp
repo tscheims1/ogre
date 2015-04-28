@@ -54,14 +54,15 @@ void Fighter::update(Ogre::Real deltaTime)
 		}
 	}
 }
-void Fighter::checkEnemyShot(Sprite* enemy)
+bool Fighter::checkEnemyShot(Sprite* enemy)
 {
 	for(std::vector<Shot*>::iterator it = shots.begin(); it != shots.end(); ++it)
 	{
 		if((*it)->checkCollsion(enemy))
 		{
 			enemy->die();
-			break;
+			return true;
 		}
 	}
+	return false;
 }
