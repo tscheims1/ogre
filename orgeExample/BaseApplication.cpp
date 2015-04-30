@@ -91,14 +91,25 @@ void BaseApplication::createCamera(void)
 {
     // Create the camera
     mCamera = mSceneMgr->createCamera("PlayerCam");
-
+	mCamera->setProjectionType(Ogre::PT_PERSPECTIVE);
+	
     // Position it at 500 in Z direction
-    mCamera->setPosition(Ogre::Vector3(0,0,80));
+    mCamera->setPosition(Ogre::Vector3(0,200,0));
     // Look back along -Z
-    mCamera->lookAt(Ogre::Vector3(0,0,-300));
+    mCamera->setDirection(0,-1,0);
     mCamera->setNearClipDistance(5);
-
-    mCameraMan = new OgreBites::SdkCameraMan(mCamera);   // create a default camera controller
+	mCamera->setFarClipDistance(10000);
+	
+	//->yaw(Ogre::Degree(180));
+	Ogre::AxisAlignedBox bb = mCamera->getBoundingBox();
+		
+	
+	//OutputDebugStringA(s.c_str());
+	
+	//mCamera->setFOVy::Degree(45));
+	/*mCamera->setOrthoWindowWidth(400);
+	mCamera->setOrthoWindowHeight(400);*/
+//    mCameraMan = new OgreBites::SdkCameraMan(mCamera);   // create a default camera controller
 }
 //-------------------------------------------------------------------------------------
 void BaseApplication::createFrameListener(void)
@@ -149,7 +160,6 @@ void BaseApplication::createFrameListener(void)
     mTrayMgr->showFrameStats(OgreBites::TL_BOTTOMLEFT);
     mTrayMgr->showLogo(OgreBites::TL_BOTTOMRIGHT);
     mTrayMgr->hideCursor();
-
     // create a params panel for displaying sample details
     Ogre::StringVector items;
     items.push_back("cam.pX");
@@ -180,8 +190,13 @@ void BaseApplication::createViewports(void)
 {
     // Create one viewport, entire window
     Ogre::Viewport* vp = mWindow->addViewport(mCamera);
-    vp->setBackgroundColour(Ogre::ColourValue(0,0,0));
+	
+	std::string s = std::to_string(vp->getActualHeight())+" " +std::to_string(vp->getActualWidth()) + " " +std::to_string(vp->getActualTop()) +std::to_string(vp->getActualLeft());
+	/*MessageBox(NULL,s.c_str()
+		,"caption",MB_OK);*/
 
+    vp->setBackgroundColour(Ogre::ColourValue(0,0,0));
+	
     // Alter the camera aspect ratio to match the viewport
     mCamera->setAspectRatio(
         Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
@@ -289,7 +304,7 @@ bool BaseApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
 
     if (!mTrayMgr->isDialogVisible())
     {
-        mCameraMan->frameRenderingQueued(evt);   // if dialog isn't up, then update the camera
+       // mCameraMan->frameRenderingQueued(evt);   // if dialog isn't up, then update the camera
         if (mDetailsPanel->isVisible())   // if details panel is visible, then update its contents
         {
             mDetailsPanel->setParamValue(0, Ogre::StringConverter::toString(mCamera->getDerivedPosition().x));
@@ -301,41 +316,22 @@ bool BaseApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
             mDetailsPanel->setParamValue(7, Ogre::StringConverter::toString(mCamera->getDerivedOrientation().z));
         }
     }
-	/*Ogre::Node* player = mSceneMgr->getRootSceneNode()->getChild("fighter");*/
 	Ogre::Vector3 pos =  Ogre::Vector3(0,0,0);
 	if(input[UP])
-		pos.z = 2*GAME_UNIT;
+		pos.z = -4*GAME_UNIT;
 	if(input[DOWN])
-		pos.z = -2*GAME_UNIT;
+		pos.z = 4*GAME_UNIT;
 	if(input[LEFT])
-		pos.x = 2*GAME_UNIT;
+		pos.x = -4*GAME_UNIT;
 	if(input[RIGHT])
-		pos.x = -2*GAME_UNIT;
+		pos.x = 4*GAME_UNIT;
 	if(input[FIRE])
 		fighter->fire();
 	
-	//pos*=evt.timeSinceLastFrame;
-	//(*player).translate(pos*evt.timeSinceLastFrame,Ogre::Node::TS_LOCAL);
+
 	fighter->move(pos*evt.timeSinceLastFrame);
 	
-	/*for(Enemy* e:enemyList)
-	{
-		if(e->checkCollsion(fighter))
-		{	
-			//Game Over
-			/*
-			Ogre::AxisAlignedBox boxA = e->getBoundingBox();
-			Ogre::AxisAlignedBox boxB = fighter->getBoundingBox();
-			
-			Ogre::Vector3 vectorA = boxA.getCenter();
-			Ogre::Vector3 vectorB = boxB.getCenter();
-			
-			std::string text = "vA"+std::to_string(vectorA.x) + " "+std::to_string(vectorA.y) +" "+std::to_string(vectorA.z) + " <--->"+
-				"vB"+std::to_string(vectorB.x) +" " + std::to_string(vectorB.y) + " "+std::to_string(vectorB.z);
-			MessageBox(NULL,"title",text.c_str()
-				,MB_OK);
-		}
-	}*/
+
 	mGameContainer->update(evt.timeSinceLastFrame);
 	mGameContainer->manageCollision();
 	
@@ -487,28 +483,28 @@ bool BaseApplication::keyReleased( const OIS::KeyEvent &arg )
 	}
 
 
-    mCameraMan->injectKeyUp(arg);
+    //mCameraMan->injectKeyUp(arg);
     return true;
 }
 
 bool BaseApplication::mouseMoved( const OIS::MouseEvent &arg )
 {
     if (mTrayMgr->injectMouseMove(arg)) return true;
-    mCameraMan->injectMouseMove(arg);
+    //mCameraMan->injectMouseMove(arg);
     return true;
 }
 
 bool BaseApplication::mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
 {
     if (mTrayMgr->injectMouseDown(arg, id)) return true;
-    mCameraMan->injectMouseDown(arg, id);
+    //mCameraMan->injectMouseDown(arg, id);
     return true;
 }
 
 bool BaseApplication::mouseReleased( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
 {
     if (mTrayMgr->injectMouseUp(arg, id)) return true;
-    mCameraMan->injectMouseUp(arg, id);
+    //mCameraMan->injectMouseUp(arg, id);
     return true;
 }
 

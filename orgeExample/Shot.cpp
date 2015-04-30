@@ -9,13 +9,13 @@ Shot::Shot(Ogre::SceneManager** sceneManagerPtr,Ogre::Vector3 position)
 
 
 	mNode->scale(0.2f,0.2f,0.2f);
-	mNode->yaw(Ogre::Degree(-180));
-	mNode->pitch(Ogre::Degree(-90));
+	//mNode->yaw(Ogre::Degree(-180));
+	//mNode->pitch(Ogre::Degree(-90));
 	mNode->attachObject(mEntity);
 }
 void Shot::update(Ogre::Real deltaTime)
 {
-	Ogre::Vector3 pos = Ogre::Vector3(0,4*GAME_UNIT,0) * deltaTime;
+	Ogre::Vector3 pos = Ogre::Vector3(0,0,-4*GAME_UNIT) * deltaTime;
 
 	mNode->setPosition(mNode->getPosition()+pos);
 }

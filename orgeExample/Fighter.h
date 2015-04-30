@@ -8,6 +8,7 @@ class Fighter : public Sprite
 protected:
 	std::vector<Shot*>mShots;
 	Ogre::Camera** mCameraPtr;
+	Ogre::Timer lastShot;
 	int shotCount;
 public:
 	Fighter::Fighter(Ogre::SceneManager** sceneManagerPtr,Ogre::Camera** cameraPtr,Ogre::Vector3 position);

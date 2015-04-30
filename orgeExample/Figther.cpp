@@ -8,22 +8,27 @@ Fighter::Fighter(Ogre::SceneManager** sceneManagerPtr,Ogre::Camera** cameraPtr,O
 	mRoot =	 (*mSceneManagerPtr)->getRootSceneNode();
 	mNode = mRoot->createChildSceneNode("fighter");
 
-	
+	mNode->setDebugDisplayEnabled(true);
 	mNode->setPosition(position);
 	mNode->yaw(Ogre::Degree(-180));
 
-	mNode->pitch(Ogre::Degree(-90));
+	//mNode->pitch(Ogre::Degree(-90));
 	mNode->attachObject(mEntity);
 	mNode->showBoundingBox(true);
 }
 void Fighter::die()
 {
-	mNode->detachAllObjects();
-	(*mSceneManagerPtr)->destroySceneNode(mNode);
+	/*mNode->detachAllObjects();
+	(*mSceneManagerPtr)->destroySceneNode(mNode);*/
 
 }
 void Fighter::fire()
 {
+	if(lastShot.getMilliseconds() > 100)
+		lastShot.reset();
+	else
+		return;
+
 	Ogre::Vector3 shotPos = mNode->getPosition();
 	Shot* shotPtr = new Shot(mSceneManagerPtr,shotPos);	
 	mShots.push_back(shotPtr);

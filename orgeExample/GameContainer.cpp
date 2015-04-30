@@ -22,7 +22,7 @@ void GameContainer::manageCollision()
 		if(mFighter->checkCollsion((*it)))
 		{
 			mFighter->die();
-			delete (mFighter);
+			//delete (mFighter);
 
 			break;
 		}

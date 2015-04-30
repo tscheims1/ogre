@@ -29,17 +29,31 @@ TutorialApplication::~TutorialApplication(void)
 void TutorialApplication::createScene(void)
 {
     // create your scene here :)
-	mCamera->setPosition(0, 47, 400);
+	//mCamera->setPosition(0, 47, 400);
 
 
-	Ogre::Vector3 position = Ogre::Vector3(-84, 48,0);
+	Ogre::Vector3 position = Ogre::Vector3(-30, 0,-100);
 	fighter = new Fighter(&mSceneMgr,&mCamera,position);
 	mGameContainer = new GameContainer(fighter);
 	
-	position = Ogre::Vector3(84, 48, 0);
+	position = Ogre::Vector3(0, 0, -300);
 	mGameContainer = new GameContainer(fighter);
 	mGameContainer->add(new Enemy(&mSceneMgr,position));
 
+	/*Ogre::Plane plane(Ogre::Vector3::UNIT_Y, 0);
+
+	Ogre::MeshManager::getSingleton().createPlane(
+		  "ground",
+		  Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+		  plane, 
+		  1500, 1500, 20, 20, 
+		  true, 
+		  1, 5, 5, 
+		  Ogre::Vector3::UNIT_Z);
+
+	Ogre::Entity* groundEntity = mSceneMgr->createEntity("ground");
+	mSceneMgr->getRootSceneNode()->createChildSceneNode()->attachObject(groundEntity);
+	*/
 
 
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.5,0.5,0.5));
@@ -62,21 +76,16 @@ void TutorialApplication::createScene(void)
 	
 	Ogre::Entity* ogreEntity3 = mSceneMgr->createEntity("ogrehead.mesh");
  
-	ogreNode3->setPosition(0, 104, 0);
+	ogreNode3->setPosition(0, 0, 104);
 	ogreNode3->attachObject(ogreEntity3);
 
 	Ogre::Entity* ogreEntity4 = mSceneMgr->createEntity("RZR-002.mesh");
  
-	/*
-	ogreNode4->setPosition(-84, 48, 0);
-	ogreNode4->yaw(Ogre::Degree(-180));
-	ogreNode4->setScale(3,3,3);
-	ogreNode4->pitch(Ogre::Degree(-90));
-	ogreNode4->attachObject(ogreEntity4);*/
+
 
 	
 	Ogre::Light* light = mSceneMgr->createLight("MainLight");
-	light->setPosition(20, 80, 50);
+	light->setPosition(300, 100, 300);
 
 
 }
