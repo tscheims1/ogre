@@ -9,9 +9,6 @@ Enemy::Enemy(Ogre::SceneManager** sceneManager,Ogre::Vector3 position,const Ogre
 	mSceneManagerPtr = sceneManager;
 
 	mNode->setPosition(position);
-	//mNode->yaw(Ogre::Degree(-180));
-
-	//mNode->pitch(Ogre::Degree(90));
 	mNode->attachObject(mEntity);
 	mNode->showBoundingBox(true);
 }
