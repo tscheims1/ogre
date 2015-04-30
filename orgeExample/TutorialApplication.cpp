@@ -38,7 +38,7 @@ void TutorialApplication::createScene(void)
 	
 	position = Ogre::Vector3(0, 0, -300);
 	mGameContainer = new GameContainer(fighter);
-	mGameContainer->add(new Enemy(&mSceneMgr,position));
+	mGameContainer->add(new Enemy(&mSceneMgr,position,fighter->getPosition()));
 
 	/*Ogre::Plane plane(Ogre::Vector3::UNIT_Y, 0);
 

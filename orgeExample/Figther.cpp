@@ -2,6 +2,8 @@
 Fighter::Fighter(Ogre::SceneManager** sceneManagerPtr,Ogre::Camera** cameraPtr,Ogre::Vector3 position)
 {
 
+
+	
 	mCameraPtr = cameraPtr;
 	mSceneManagerPtr = sceneManagerPtr;
 	mEntity = (*mSceneManagerPtr)->createEntity("RZR-002.mesh");
@@ -36,6 +38,10 @@ void Fighter::fire()
 }
 void Fighter::update(Ogre::Real deltaTime)
 {
+
+	/*
+	 * Update all shots
+	 */
 	for(std::vector<Shot*>::iterator it = mShots.begin(); it != mShots.end();)
 	{
 		(*it)->update(deltaTime);
@@ -59,6 +65,8 @@ void Fighter::update(Ogre::Real deltaTime)
 			++it;
 		}
 	}
+	//Update positon for enemies
+	mCurrentPosition = mNode->getPosition();
 }
 bool Fighter::checkEnemyShot(Sprite* enemy)
 {
@@ -71,4 +79,8 @@ bool Fighter::checkEnemyShot(Sprite* enemy)
 		}
 	}
 	return false;
+}
+const Ogre::Vector3* Fighter::getPosition()
+{
+	return &mCurrentPosition;
 }
