@@ -9,8 +9,6 @@ Shot::Shot(Ogre::SceneManager** sceneManagerPtr,Ogre::Vector3 position)
 
 
 	mNode->scale(0.2f,0.2f,0.2f);
-	//mNode->yaw(Ogre::Degree(-180));
-	//mNode->pitch(Ogre::Degree(-90));
 	mNode->attachObject(mEntity);
 }
 void Shot::update(Ogre::Real deltaTime)
