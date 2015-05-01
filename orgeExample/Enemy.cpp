@@ -26,8 +26,10 @@ void Enemy::update(Ogre::Real deltaTime)
 	src.y = 0;                                                   
 	direction.y = 0;
 	src.normalise();
+	direction.normalise();
+	mNode->setPosition(mNode->getPosition()+direction*2*GAME_UNIT*deltaTime);
 
-	Ogre::Quaternion quat = src.getRotationTo(direction.normalisedCopy()); 
+	Ogre::Quaternion quat = src.getRotationTo(direction); 
 
 	mNode->rotate(quat);
 }
