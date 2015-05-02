@@ -13,7 +13,7 @@ Ogre::AxisAlignedBox Sprite::getBoundingBox()
 }
 void Sprite::move(Ogre::Vector3 moveVector)
 {
-
+	mCurrentMoveVector = moveVector;
 	mNode->setPosition(moveVector+mNode->getPosition());
 	std::string s = "posFighter: "+Ogre::StringConverter::toString(mNode->getPosition()) + "\n";
 	OutputDebugStringA (s.c_str());

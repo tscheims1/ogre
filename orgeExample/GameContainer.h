@@ -12,7 +12,6 @@ protected:
 
 public:
 	void update(Ogre::Real deltaTime);
-	void manageCollision();
 	GameContainer(Fighter* fighter);
 	void add(Sprite* element);
 

@@ -10,28 +10,24 @@ void GameContainer::add(Sprite* sprite)
 }
 void GameContainer::update(Ogre::Real deltaTime)
 {
-	for(std::vector<Sprite*>::iterator it = mElements.begin(); it != mElements.end();++it)
-		(*it)->update(deltaTime);
-	mFighter->update(deltaTime);
-}
-void GameContainer::manageCollision()
-{
-
-	for(std::vector<Sprite*>::iterator it = mElements.begin();it != mElements.end();)
+	for(std::vector<Sprite*>::iterator it = mElements.begin(); it != mElements.end();)
 	{
 		if(mFighter->checkCollsion((*it)))
 		{
-			mFighter->die();
-			//delete (mFighter);
-
-			break;
+			//mFighter->die();
+			//delete (mFight9er);
+			++it;
 		}
-		if(mFighter->checkEnemyShot((*it)))
+		else if(mFighter->checkEnemyShot((*it)))
 		{
 			delete (*it);
 			it = mElements.erase(it);
 		}
 		else
+		{
+			(*it)->update(deltaTime);
 			++it;
+		}
 	}
+	mFighter->update(deltaTime);
 }

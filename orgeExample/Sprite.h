@@ -7,6 +7,7 @@ protected:
 	Ogre::SceneManager** mSceneManagerPtr;
 	Ogre::SceneNode* mNode;
 	Ogre::SceneNode* mRoot;
+	Ogre::Vector3 mCurrentMoveVector;
 public:
 	Sprite();
 	virtual void move(Ogre::Vector3 moveVector);

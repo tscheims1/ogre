@@ -37,7 +37,7 @@ void Fighter::fire()
 }
 void Fighter::update(Ogre::Real deltaTime)
 {
-
+	mNode->setPosition(mNode->getPosition()+mCurrentMoveVector);
 	/*
 	 * Update all shots
 	 */

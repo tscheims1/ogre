@@ -333,7 +333,6 @@ bool BaseApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	
 
 	mGameContainer->update(evt.timeSinceLastFrame);
-	mGameContainer->manageCollision();
 	
     return true;
 }

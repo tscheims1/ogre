@@ -6,6 +6,7 @@ class Enemy : public Sprite
 {
 protected:
 	const Ogre::Vector3* mTargetPosition;
+
 public:
 	Enemy(Ogre::SceneManager** sceneManager,Ogre::Vector3 position,const Ogre::Vector3* targetPosition);
 	void die();
