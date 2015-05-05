@@ -333,7 +333,7 @@ bool BaseApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	
 
 	fighter->move(pos*evt.timeSinceLastFrame);
-	fighter->setCursorPos(Ogre::Vector3(mousePos[MOUSEX],0,mousePos[MOUSEZ]));
+	//fighter->setCursorPos(Ogre::Vector3(mousePos[MOUSEX],0,mousePos[MOUSEZ]));
 
 	mGameContainer->update(evt.timeSinceLastFrame);
 	

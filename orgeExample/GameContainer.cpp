@@ -42,4 +42,5 @@ void GameContainer::update(Ogre::Real deltaTime)
 			++it;
 		}
 	}
+	mFighter->update(deltaTime);
 }

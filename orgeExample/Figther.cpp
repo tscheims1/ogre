@@ -1,7 +1,7 @@
 #include "Fighter.h"
 Fighter::Fighter(Ogre::SceneManager** sceneManagerPtr,Ogre::Camera** cameraPtr,Ogre::Vector3 position)
 {
-
+	mCurrentPosition = position;
 
 	
 	mCameraPtr = cameraPtr;
@@ -34,6 +34,7 @@ void Fighter::fire()
 	Shot* shotPtr = new Shot(mSceneManagerPtr,shotPos);	
 	mShots.push_back(shotPtr);
 
+
 }
 void Fighter::update(Ogre::Real deltaTime)
 {
@@ -45,7 +46,7 @@ void Fighter::update(Ogre::Real deltaTime)
 	direction.y = 0;
 	src.normalise();
 	direction.normalise();
-
+	
 	mNode->setPosition(mNode->getPosition()+mCurrentMoveVector);
 	Ogre::Quaternion quat = src.getRotationTo(direction); 
 
