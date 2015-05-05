@@ -38,7 +38,7 @@ void TutorialApplication::createScene(void)
 			fprintf(stderr, "Unable to initialize SDL: %s\n", SDL_GetError());
 	}
 	int audio_rate = 22050;
-	Uint16 audio_format = AUDIO_S8;
+	Uint16 audio_format = AUDIO_S16;
 	int audio_channels = 2;
 	int audio_buffers = 4096;
  
@@ -65,6 +65,9 @@ void TutorialApplication::createScene(void)
 	
 	position = Ogre::Vector3(0, 0, -300);
 	mGameContainer = new GameContainer(fighter);
+	mGameContainer->add(new Enemy(&mSceneMgr,position,fighter->getPosition()));
+
+	position = Ogre::Vector3(-30, 0, -200);
 	mGameContainer->add(new Enemy(&mSceneMgr,position,fighter->getPosition()));
 
 

@@ -21,8 +21,11 @@ This source file is part of the
 #define LEFT		2
 #define RIGHT		3
 #define FIRE		4
-
+#define MOUSEX		1
+#define MOUSEZ		2
 bool input[5] = {0,0,0,0,0};
+float mousePos[2] = {0,0};
+
 
 //-------------------------------------------------------------------------------------
 BaseApplication::BaseApplication(void)
@@ -159,7 +162,7 @@ void BaseApplication::createFrameListener(void)
 	//mTrayMgr = new OgreBites::SdkTrayManager("InterfaceName", mWindow, mMouse, this);
     mTrayMgr->showFrameStats(OgreBites::TL_BOTTOMLEFT);
     mTrayMgr->showLogo(OgreBites::TL_BOTTOMRIGHT);
-    mTrayMgr->hideCursor();
+    //mTrayMgr->hideCursor();
     // create a params panel for displaying sample details
     Ogre::StringVector items;
     items.push_back("cam.pX");
@@ -330,7 +333,7 @@ bool BaseApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	
 
 	fighter->move(pos*evt.timeSinceLastFrame);
-	
+	fighter->setCursorPos(Ogre::Vector3(mousePos[MOUSEX],0,mousePos[MOUSEZ]));
 
 	mGameContainer->update(evt.timeSinceLastFrame);
 	
@@ -490,6 +493,13 @@ bool BaseApplication::mouseMoved( const OIS::MouseEvent &arg )
 {
     if (mTrayMgr->injectMouseMove(arg)) return true;
     //mCameraMan->injectMouseMove(arg);
+
+	OutputDebugStringA(std::to_string(arg.state.X.abs).c_str());
+	OutputDebugStringA(std::to_string(arg.state.Y.abs).c_str());
+	OutputDebugStringA(std::to_string(arg.state.Z.abs).c_str());
+
+	mousePos[MOUSEX] = arg.state.X.abs;
+	mousePos[MOUSEZ] = arg.state.Z.abs;
     return true;
 }
 

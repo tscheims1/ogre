@@ -15,6 +15,21 @@ void Sprite::move(Ogre::Vector3 moveVector)
 {
 	mCurrentMoveVector = moveVector;
 	mNode->setPosition(moveVector+mNode->getPosition());
-	std::string s = "posFighter: "+Ogre::StringConverter::toString(mNode->getPosition()) + "\n";
+	std::string s = "posFighter: "+Ogre::StringConverter::toString(moveVector) + "\n";
 	OutputDebugStringA (s.c_str());
+}
+bool Sprite::checkBeforeCollide(Sprite* other,int distance)
+{
+	Ogre::Vector3 absVector = mNode->getPosition();
+	Ogre::Ray ray(absVector,mCurrentMoveVector);
+	Ogre::AxisAlignedBox  box = other->getBoundingBox();
+	std::pair<bool,float> result = ray.intersects(box);
+
+	if(result.first == false)
+		return false;
+
+	OutputDebugStringA(std::to_string(result.second).c_str());
+
+	if(result.second < distance)
+		return true;
 }

@@ -11,6 +11,8 @@ protected:
 	Ogre::Timer lastShot;
 	int shotCount;
 	Ogre::Vector3 mCurrentPosition;
+	Ogre::Vector3 mCursorPos;
+	
 public:
 	Fighter::Fighter(Ogre::SceneManager** sceneManagerPtr,Ogre::Camera** cameraPtr,Ogre::Vector3 position);
 	void die();
@@ -18,6 +20,7 @@ public:
 	void update(Ogre::Real deltaTime);
 	bool checkEnemyShot(Sprite* enemy);
 	const Ogre::Vector3* getPosition();
+	void setCursorPos(Ogre::Vector3 pos);
 
 };
 #endif

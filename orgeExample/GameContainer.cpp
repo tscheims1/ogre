@@ -10,6 +10,7 @@ void GameContainer::add(Sprite* sprite)
 }
 void GameContainer::update(Ogre::Real deltaTime)
 {
+	
 	for(std::vector<Sprite*>::iterator it = mElements.begin(); it != mElements.end();)
 	{
 		if(mFighter->checkCollsion((*it)))
@@ -25,9 +26,20 @@ void GameContainer::update(Ogre::Real deltaTime)
 		}
 		else
 		{
-			(*it)->update(deltaTime);
+			//avoid enemy collisions
+			bool update = true;
+			for(std::vector<Sprite*>::iterator it2 = mElements.begin(); it2 !=mElements.end();++it2)
+			{
+				//don't check own collision
+				if((*it) == (*it2))
+					continue;
+				if((*it)->checkBeforeCollide((*it2),10))
+					update = false;
+
+			}
+			if(update)
+				(*it)->update(deltaTime);
 			++it;
 		}
 	}
-	mFighter->update(deltaTime);
 }

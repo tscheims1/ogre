@@ -37,7 +37,20 @@ void Fighter::fire()
 }
 void Fighter::update(Ogre::Real deltaTime)
 {
+	Ogre::Vector3 curPos = mNode->getPosition();
+	Ogre::Vector3 direction = curPos - mCursorPos;
+
+	Ogre::Vector3 src = mNode->getOrientation() * Ogre::Vector3::UNIT_Z;
+	src.y = 0;                                                   
+	direction.y = 0;
+	src.normalise();
+	direction.normalise();
+
 	mNode->setPosition(mNode->getPosition()+mCurrentMoveVector);
+	Ogre::Quaternion quat = src.getRotationTo(direction); 
+
+	mNode->rotate(quat);
+
 	/*
 	 * Update all shots
 	 */
@@ -82,4 +95,8 @@ bool Fighter::checkEnemyShot(Sprite* enemy)
 const Ogre::Vector3* Fighter::getPosition()
 {
 	return &mCurrentPosition;
+}
+void Fighter::setCursorPos(Ogre::Vector3 pos)
+{
+	mCursorPos = pos;
 }

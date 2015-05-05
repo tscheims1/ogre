@@ -22,6 +22,8 @@ void Enemy::update(Ogre::Real deltaTime)
 	Ogre::Vector3 myPos =mNode->getPosition();
 
 	Ogre::Vector3 direction = (*mTargetPosition)-myPos;
+	mCurrentMoveVector = direction;
+	
 	Ogre::Vector3 src = mNode->getOrientation() * Ogre::Vector3::UNIT_Z;
 	src.y = 0;                                                   
 	direction.y = 0;

@@ -13,6 +13,7 @@ public:
 	virtual void move(Ogre::Vector3 moveVector);
 	virtual void update(Ogre::Real deltaTime) =0;
 	virtual bool checkCollsion(Sprite* other);
+	virtual bool checkBeforeCollide(Sprite* other,int distance);
 	virtual Ogre::AxisAlignedBox getBoundingBox();
 	virtual void die() =0;
 };
