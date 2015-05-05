@@ -77,6 +77,7 @@ protected:
     Ogre::RenderWindow* mWindow;
     Ogre::String mResourcesCfg;
     Ogre::String mPluginsCfg;
+	Ogre::Vector3 mCursor;
 
 	//Fix for 1.9
 	Ogre::OverlaySystem *mOverlaySystem;

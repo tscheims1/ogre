@@ -333,7 +333,7 @@ bool BaseApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	
 
 	fighter->move(pos*evt.timeSinceLastFrame);
-	//fighter->setCursorPos(Ogre::Vector3(mousePos[MOUSEX],0,mousePos[MOUSEZ]));
+	fighter->setCursorPos(mCursor);
 
 	mGameContainer->update(evt.timeSinceLastFrame);
 	
@@ -494,12 +494,14 @@ bool BaseApplication::mouseMoved( const OIS::MouseEvent &arg )
     if (mTrayMgr->injectMouseMove(arg)) return true;
     //mCameraMan->injectMouseMove(arg);
 
-	OutputDebugStringA(std::to_string(arg.state.X.abs).c_str());
+	/*OutputDebugStringA(std::to_string(arg.state.X.abs).c_str());
 	OutputDebugStringA(std::to_string(arg.state.Y.abs).c_str());
 	OutputDebugStringA(std::to_string(arg.state.Z.abs).c_str());
 
 	mousePos[MOUSEX] = arg.state.X.abs;
-	mousePos[MOUSEZ] = arg.state.Z.abs;
+	mousePos[MOUSEZ] = arg.state.Z.abs;*/
+
+	mCursor = Ogre::Vector3(arg.state.X.rel,0,arg.state.Y.rel);
     return true;
 }
 
