@@ -449,9 +449,6 @@ bool BaseApplication::keyPressed( const OIS::KeyEvent &arg )
 		case OIS::KC_LEFT:
 			input[LEFT] = true;
 			break;
-			
-		case OIS::KC_SPACE:
-			input[FIRE] = true;
 	}
 
     return true;
@@ -476,8 +473,7 @@ bool BaseApplication::keyReleased( const OIS::KeyEvent &arg )
 		case OIS::KC_LEFT:
 			input[LEFT] = false;
 			break;
-		case OIS::KC_SPACE:
-			input[FIRE] = false;
+
 	}
 
 
@@ -488,6 +484,9 @@ bool BaseApplication::keyReleased( const OIS::KeyEvent &arg )
 bool BaseApplication::mouseMoved( const OIS::MouseEvent &arg )
 {
     if (mTrayMgr->injectMouseMove(arg)) return true;
+
+	
+
 
 	Ogre::Viewport* vp = mSceneMgr->getCurrentViewport();
 	Ogre::Real y = (Ogre::Real)arg.state.Y.abs /vp->getActualHeight();
@@ -503,8 +502,7 @@ bool BaseApplication::mouseMoved( const OIS::MouseEvent &arg )
 	Ogre::Real lamda=0;
 	lamda = -origin.y/direction.y; 
 
-	mCursor = mouseRay.getPoint(lamda);
-	
+	mCursor = mouseRay.getPoint(lamda);	
 
 	std::string output = "x:" +std::to_string(x)+" y:"+std::to_string(y)+"\t";
 	output += Ogre::StringConverter::toString(mCursor)+"\n";
@@ -516,14 +514,23 @@ bool BaseApplication::mouseMoved( const OIS::MouseEvent &arg )
 bool BaseApplication::mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
 {
     if (mTrayMgr->injectMouseDown(arg, id)) return true;
-    //mCameraMan->injectMouseDown(arg, id);
+    
+	if(id == OIS::MB_Left)
+	{
+		input[FIRE] = true;
+		
+	}
     return true;
 }
 
 bool BaseApplication::mouseReleased( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
 {
     if (mTrayMgr->injectMouseUp(arg, id)) return true;
-    //mCameraMan->injectMouseUp(arg, id);
+	if(id == OIS::MB_Left)
+	{
+		input[FIRE] = false;
+		
+	}
     return true;
 }
 

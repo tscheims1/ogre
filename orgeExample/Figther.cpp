@@ -31,7 +31,8 @@ void Fighter::fire()
 		return;
 
 	Ogre::Vector3 shotPos = mNode->getPosition();
-	Shot* shotPtr = new Shot(mSceneManagerPtr,shotPos);	
+	Ogre::Vector3 direction = mNode->getOrientation()*Ogre::Vector3::UNIT_Z;
+	Shot* shotPtr = new Shot(mSceneManagerPtr,shotPos,direction.normalisedCopy());	
 	mShots.push_back(shotPtr);
 
 
