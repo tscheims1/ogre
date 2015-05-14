@@ -41,7 +41,7 @@ void Fighter::update(Ogre::Real deltaTime)
 	Ogre::Vector3 curPos = mNode->getPosition();
 	Ogre::Vector3 direction = curPos - mCursorPos;
 
-	Ogre::Vector3 src = mNode->getOrientation() * Ogre::Vector3::UNIT_Z;
+	Ogre::Vector3 src = mNode->getOrientation() * -Ogre::Vector3::UNIT_Z;
 	src.y = 0;                                                   
 	direction.y = 0;
 	src.normalise();

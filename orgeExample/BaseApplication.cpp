@@ -453,11 +453,7 @@ bool BaseApplication::keyPressed( const OIS::KeyEvent &arg )
 		case OIS::KC_SPACE:
 			input[FIRE] = true;
 	}
-	//player->setPosition(player->getPosition()+pos);
 
-
-
-    //mCameraMan->injectKeyDown(arg);
     return true;
 }
 
@@ -492,16 +488,28 @@ bool BaseApplication::keyReleased( const OIS::KeyEvent &arg )
 bool BaseApplication::mouseMoved( const OIS::MouseEvent &arg )
 {
     if (mTrayMgr->injectMouseMove(arg)) return true;
-    //mCameraMan->injectMouseMove(arg);
 
-	/*OutputDebugStringA(std::to_string(arg.state.X.abs).c_str());
-	OutputDebugStringA(std::to_string(arg.state.Y.abs).c_str());
-	OutputDebugStringA(std::to_string(arg.state.Z.abs).c_str());
+	Ogre::Viewport* vp = mSceneMgr->getCurrentViewport();
+	Ogre::Real y = (Ogre::Real)arg.state.Y.abs /vp->getActualHeight();
+	Ogre::Real x = (Ogre::Real)arg.state.X.abs /vp->getActualWidth();
+	Ogre::Ray mouseRay = mCamera->getCameraToViewportRay(x,y);
 
-	mousePos[MOUSEX] = arg.state.X.abs;
-	mousePos[MOUSEZ] = arg.state.Z.abs;*/
+	Ogre::Vector3 origin = mouseRay.getOrigin();
+	Ogre::Vector3 direction = mouseRay.getDirection();
 
-	mCursor = Ogre::Vector3(arg.state.X.rel,0,arg.state.Y.rel);
+	//Calculate Lamda (distance)
+	//-> where the ray hit's the y = 0 plane
+	//origin.y + lamda * direction.y == 0
+	Ogre::Real lamda=0;
+	lamda = -origin.y/direction.y; 
+
+	mCursor = mouseRay.getPoint(lamda);
+	
+
+	std::string output = "x:" +std::to_string(x)+" y:"+std::to_string(y)+"\t";
+	output += Ogre::StringConverter::toString(mCursor)+"\n";
+
+	OutputDebugStringA(output.c_str());
     return true;
 }
 

@@ -16,7 +16,7 @@ void Sprite::move(Ogre::Vector3 moveVector)
 	mCurrentMoveVector = moveVector;
 	mNode->setPosition(moveVector+mNode->getPosition());
 	std::string s = "posFighter: "+Ogre::StringConverter::toString(moveVector) + "\n";
-	OutputDebugStringA (s.c_str());
+	//OutputDebugStringA (s.c_str());
 }
 bool Sprite::checkBeforeCollide(Sprite* other,int distance)
 {
@@ -28,7 +28,7 @@ bool Sprite::checkBeforeCollide(Sprite* other,int distance)
 	if(result.first == false)
 		return false;
 
-	OutputDebugStringA(std::to_string(result.second).c_str());
+	//OutputDebugStringA(std::to_string(result.second).c_str());
 
 	if(result.second < distance)
 		return true;
