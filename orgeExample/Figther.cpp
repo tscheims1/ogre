@@ -1,4 +1,5 @@
 #include "Fighter.h"
+#include "AudioManager.h"
 Fighter::Fighter(Ogre::SceneManager** sceneManagerPtr,Ogre::Camera** cameraPtr,Ogre::Vector3 position)
 {
 	mCurrentPosition = position;
@@ -29,6 +30,9 @@ void Fighter::fire()
 		lastShot.reset();
 	else
 		return;
+
+	AudioManager::getInstance().play("shot1");
+	
 
 	Ogre::Vector3 shotPos = mNode->getPosition();
 	Ogre::Vector3 direction = mNode->getOrientation()*Ogre::Vector3::UNIT_Z;

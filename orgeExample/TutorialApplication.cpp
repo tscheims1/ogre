@@ -34,6 +34,7 @@ TutorialApplication::~TutorialApplication(void)
 void TutorialApplication::createScene(void)
 {
 	//audio
+	/*
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) {
 			fprintf(stderr, "Unable to initialize SDL: %s\n", SDL_GetError());
 	}
@@ -54,7 +55,7 @@ void TutorialApplication::createScene(void)
 	channel = Mix_PlayChannel(-1, sound, 0);
 	if(channel == -1) {
 		fprintf(stderr, "Unable to play WAV file: %s\n", Mix_GetError());
-	}
+	}*/
 
 
 
@@ -75,8 +76,6 @@ void TutorialApplication::createScene(void)
 		
 	Ogre::Light* light = mSceneMgr->createLight("MainLight");
 	light->setPosition(300, 100, 300);
-
-
 }
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32

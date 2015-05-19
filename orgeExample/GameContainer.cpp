@@ -1,8 +1,10 @@
 #include "GameContainer.h"
+#include "AudioManager.h"
 
 GameContainer::GameContainer(Fighter* fighter)
 {
 	mFighter = fighter;
+	AudioManager::getInstance().play("background");
 }
 void GameContainer::add(Sprite* sprite)
 {

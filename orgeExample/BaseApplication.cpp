@@ -24,7 +24,6 @@ This source file is part of the
 #define MOUSEX		1
 #define MOUSEZ		2
 bool input[5] = {0,0,0,0,0};
-float mousePos[2] = {0,0};
 
 
 //-------------------------------------------------------------------------------------
