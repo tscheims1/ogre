@@ -35,7 +35,7 @@ void GameContainer::update(Ogre::Real deltaTime)
 				//don't check own collision
 				if((*it) == (*it2))
 					continue;
-				if((*it)->checkBeforeCollide((*it2),10))
+				if((*it)->checkBeforeCollide((*it2),1))
 					update = false;
 
 			}

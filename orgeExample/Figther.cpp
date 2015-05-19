@@ -38,8 +38,6 @@ void Fighter::fire()
 	Ogre::Vector3 direction = mNode->getOrientation()*Ogre::Vector3::UNIT_Z;
 	Shot* shotPtr = new Shot(mSceneManagerPtr,shotPos,direction.normalisedCopy());	
 	mShots.push_back(shotPtr);
-
-
 }
 void Fighter::update(Ogre::Real deltaTime)
 {

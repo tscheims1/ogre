@@ -56,10 +56,6 @@ void TutorialApplication::createScene(void)
 	if(channel == -1) {
 		fprintf(stderr, "Unable to play WAV file: %s\n", Mix_GetError());
 	}*/
-
-
-
-
 	Ogre::Vector3 position = Ogre::Vector3(-30, 0,-100);
 	fighter = new Fighter(&mSceneMgr,&mCamera,position);
 	mGameContainer = new GameContainer(fighter);

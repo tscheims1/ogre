@@ -23,6 +23,7 @@ void Enemy::update(Ogre::Real deltaTime)
 
 	Ogre::Vector3 direction = (*mTargetPosition)-myPos;
 	mCurrentMoveVector = direction;
+	direction.y = 0;
 	
 	Ogre::Vector3 src = mNode->getOrientation() * Ogre::Vector3::UNIT_Z;
 	src.y = 0;                                                   
@@ -34,4 +35,6 @@ void Enemy::update(Ogre::Real deltaTime)
 	Ogre::Quaternion quat = src.getRotationTo(direction); 
 
 	mNode->rotate(quat);
+	OutputDebugStringA(("enemy pos:"+Ogre::StringConverter::toString(mNode->getPosition())+"\n").c_str());
+
 }

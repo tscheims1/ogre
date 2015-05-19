@@ -4,6 +4,7 @@ Shot::Shot(Ogre::SceneManager** sceneManagerPtr,Ogre::Vector3 position,Ogre::Vec
 {
 	mSceneManagerPtr = sceneManagerPtr;
 	mEntity = (*sceneManagerPtr)->createEntity("RZR-002.mesh");
+	direction.y = 0;
 	mDirection = direction;
 	mNode= (*sceneManagerPtr)->getRootSceneNode()->createChildSceneNode(position);
 
