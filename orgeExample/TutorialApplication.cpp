@@ -67,7 +67,7 @@ void TutorialApplication::createScene(void)
 	position = Ogre::Vector3(-30, 0, -200);
 	mGameContainer->add(new Enemy(&mSceneMgr,position,fighter->getPosition()));
 
-
+	
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.5,0.5,0.5));
 		
 	Ogre::Light* light = mSceneMgr->createLight("MainLight");
