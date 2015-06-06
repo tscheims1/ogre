@@ -496,7 +496,7 @@ bool BaseApplication::mouseMoved( const OIS::MouseEvent &arg )
 	Ogre::Vector3 direction = mouseRay.getDirection();
 
 	//Calculate Lamda (distance)
-	//-> where the ray hit's the y = 0 plane
+	//-> where the ray hit's the x-z plane
 	//origin.y + lamda * direction.y == 0
 	Ogre::Real lamda=0;
 	lamda = -origin.y/direction.y; 
