@@ -334,6 +334,24 @@ bool BaseApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	fighter->move(pos*evt.timeSinceLastFrame);
 	fighter->setCursorPos(mCursor);
 
+	//Add enemies, if all sprites are destroyed
+	if(mGameContainer->numberOfSprites()==0)
+	{
+		const Ogre::Vector3*  figtherPos = fighter->getPosition();
+		
+		bool posFound = false;
+		Ogre::Real zPos =0;
+		Ogre::Real xPos = 0;
+		while(!posFound)
+		{
+			zPos = rand()%100-300;
+			xPos = rand()%30-30;
+			if(abs(figtherPos->x-xPos) >10 && abs(figtherPos->z-zPos)>10)
+				posFound = true;
+		}
+		mGameContainer->add(new Enemy(&mSceneMgr,Ogre::Vector3(xPos,0,zPos),fighter->getPosition()));
+
+	}
 	mGameContainer->update(evt.timeSinceLastFrame);
 	
     return true;

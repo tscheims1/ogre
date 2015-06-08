@@ -16,7 +16,7 @@ Fighter::Fighter(Ogre::SceneManager** sceneManagerPtr,Ogre::Camera** cameraPtr,O
 	mNode->yaw(Ogre::Degree(-180));
 
 	mNode->attachObject(mEntity);
-	mNode->showBoundingBox(true);
+	//mNode->showBoundingBox(true);
 }
 void Fighter::die()
 {

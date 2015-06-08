@@ -10,7 +10,7 @@ Enemy::Enemy(Ogre::SceneManager** sceneManager,Ogre::Vector3 position,const Ogre
 
 	mNode->setPosition(position);
 	mNode->attachObject(mEntity);
-	mNode->showBoundingBox(true);
+	//mNode->showBoundingBox(true);
 }
 void Enemy::die()
 {

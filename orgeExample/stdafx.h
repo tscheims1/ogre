@@ -14,5 +14,7 @@
 
 #include <SdkTrays.h>
 #include <SdkCameraMan.h>
+#include <stdlib.h>
+#include <math.h>
 
 #define GAME_UNIT 25

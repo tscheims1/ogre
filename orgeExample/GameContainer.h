@@ -14,6 +14,7 @@ public:
 	void update(Ogre::Real deltaTime);
 	GameContainer(Fighter* fighter);
 	void add(Sprite* element);
+	int numberOfSprites();
 
 };
 #endif

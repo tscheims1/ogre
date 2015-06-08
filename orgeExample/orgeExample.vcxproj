@@ -68,7 +68,9 @@
     <PostBuildEvent>
       <Command>copy "$(OutDir)\$(TargetFileName)" "$(OGRE_HOME)\Bin\$(Configuration)"
 copy "C:\Users\James\Documents\Visual Studio 2012\Projects\orgeExample\lib\x86\SDL2.dll" "$(OGRE_HOME)\Bin\$(Configuration)"
-copy "C:\Users\James\Documents\Visual Studio 2012\Projects\orgeExample\SDL2_mixer\lib\x86\SDL2_mixer.dll" $(OGRE_HOME)\Bin\$(Configuration)"</Command>
+copy "C:\Users\James\Documents\Visual Studio 2012\Projects\orgeExample\SDL2_mixer\lib\x86\SDL2_mixer.dll" $(OGRE_HOME)\Bin\$(Configuration)"
+copy "$(OutDir)\shot1.wav" "$(OGRE_HOME)\Bin\$(Configuration)"
+copy "$(OutDir)\sound.wav" "$(OGRE_HOME)\Bin\$(Configuration)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

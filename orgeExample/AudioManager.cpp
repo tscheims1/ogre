@@ -15,8 +15,8 @@ AudioManager::AudioManager()
 		exit(1);
 	}
 
-	sounds["background"] = Mix_LoadWAV("C:\\Users\\James\\Documents\\Visual Studio 2012\\Projects\\orgeExample\\Debug\\sound.wav");
-	sounds["shot1"] = Mix_LoadWAV("C:\\Users\\James\\Documents\\Visual Studio 2012\\Projects\\orgeExample\\Debug\\shot1.wav");
+	sounds["background"] = Mix_LoadWAV("sound.wav");
+	sounds["shot1"] = Mix_LoadWAV("shot1.wav");
 }
 void AudioManager::play(std::string soundName)
 {

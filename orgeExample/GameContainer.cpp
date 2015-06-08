@@ -35,8 +35,10 @@ void GameContainer::update(Ogre::Real deltaTime)
 				//don't check own collision
 				if((*it) == (*it2))
 					continue;
-				if((*it)->checkBeforeCollide((*it2),1))
+				if((*it)->checkBeforeCollide((*it2),deltaTime*GAME_UNIT))
+				{
 					update = false;
+				}
 
 			}
 			if(update)
@@ -45,4 +47,8 @@ void GameContainer::update(Ogre::Real deltaTime)
 		}
 	}
 	mFighter->update(deltaTime);
+}
+int GameContainer::numberOfSprites()
+{
+	return mElements.size();
 }
